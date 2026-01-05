@@ -1,6 +1,6 @@
-# AI Vocabulary Builder
+#  Vocabulary Builder
 
-An AI-powered web application that helps students improve their vocabulary in a structured and time-efficient way.
+A web application that helps students improve their vocabulary in a structured and time-efficient way.
 
 👨‍💻 Project status:under development 
 
@@ -20,13 +20,12 @@ AI Vocabulary Builder provides:
 - Flask
 - HTML, CSS, JavaScript
 - CSV / MySQL (for word storage)
-- Free Dictionary API
-- Datamuse API
-
+  
 ## ✨ Features
 - Daily word rotation logic
 - User progress tracking
-- API-based definitions and synonyms
+- spaced repetition for strong revision which fortify users vocabulary size
+- weekly 10 min test based on CEFR level
 - Clean web UI for learning
 
 ## 📈 Future Improvements
@@ -34,6 +33,8 @@ AI Vocabulary Builder provides:
 - Quizzes and streaks
 - Multi-language support
 - Mobile-friendly version
+- AI system integration 
+- Dictionary API addition 
 
 ## ▶️ How to Run
 ```bash
