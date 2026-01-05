@@ -8,7 +8,7 @@ A web application that helps students improve their vocabulary in a structured a
 While preparing for competitive exams like the SAT, I struggled to learn vocabulary from multiple sources. There was no single place that offered daily words with revision. This project was built to solve that problem.
 
 ## 💡 Solution
-AI Vocabulary Builder provides:
+ Vocabulary Builder provides:
 - 10 new words every day
 - Meanings and example sentences
 - Synonyms and antonyms
@@ -23,14 +23,12 @@ AI Vocabulary Builder provides:
   
 ## ✨ Features
 - Daily word rotation logic
-- User progress tracking
+- User progress tracking/ streaks 
 - spaced repetition for strong revision which fortify users vocabulary size
 - weekly 10 min test based on CEFR level
 - Clean web UI for learning
 
 ## 📈 Future Improvements
-- User login system
-- Quizzes and streaks
 - Multi-language support
 - Mobile-friendly version
 - AI system integration 
