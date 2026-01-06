@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Setting | Vocab Builder</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+</head>
+<body class="main-body">
+<h2>Setting</h2>
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 9lvh;
+    
+    }
+    .form-group {
+        margin-bottom: 1%;
+        margin-top: -24lvh;
+    }
+    label {
+        display: inline-flex;
+        margin-top: -24lvh;
+        font-weight: bold;
+    }
+    input, select {
+        width: 95%;
+        padding: 1rem;
+        bottom: 200px;
+        border: 3px solid #ced4da;
+        border-radius: 1rem;
+    }
+    button {
+        align-content: center;
+        padding: 0.5rem 1rem;
+        background-color: #2594c7;
+        color: white;
+        border: none;
+        border-radius: 0.25rem;
+        cursor: pointer;
+    }   
+    button:hover {
+        background-color: #f50ece;
+    }
+    @media (max-width: 600px) {
+        body {
+            padding: 3lvh;
+        }
+         .form-group {
+            margin-top: 0;
+        }
+        label {
+            margin-top: 0;
+        }
+        input, select {
+            width: 100%;
+        }
+        button {
+            width: 100%;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        button:hover {
+            background-color: #f50ece;
+        }
+    }
+</style>
+<form method="POST">
+    <label>Change Exam</label>
+    <select name="exam">
+            <option>NDA</option>
+            <option>CAT</option>
+            <option>SAT</option>
+            <option>DET</option>
+            <option>English Proficiency</option>
+            <option>Other</option>
+    </select>
+</form> 
+
+<form method="POST">
+    <label>Change Daily Word Limit</label>
+    <input type="number" name="word_limit">
+    <label>Font Style</label>
+    <select name="font">
+        <option>Poppins</option>
+        <option>Inter</option>
+        <option>Roboto</option>
+    </select>
+</form>
+<form>
+    <label>Change Date Range</label>
+    <input type="date" name="start_date">
+    <input type="date" name="end_date">
+</form>
+<form>
+    <label>Change Password</label>
+    <input type="password" name="current_password" placeholder="Current Password">
+    <input type="password" name="new_password" placeholder="New Password">
+    <input type="password" name="confirm_password" placeholder="Confirm New Password">
+</form>
+<button type="submit">Save Changes</button> 
+</body>
+</html>

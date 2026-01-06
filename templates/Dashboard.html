@@ -1,0 +1,484 @@
+{# {% extends "base.html" %}
+{% block content %}
+<body>
+<style>
+    /* MAIN CONTENT FIX */
+.main-content {
+        margin-left: 240px;        /* SAME as sidebar width */
+        padding: 20px 30px;
+        min-height: 100vh;
+        box-sizing: border-box;
+}
+.dashboard-container {
+    width: 100%;
+    max-width: 1100px;   /* cards center me rahenge */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.stat-grid {
+       display: grid;
+       grid-template-columns: repeat(4, 1fr); /* 4 columns of equal width */
+       grid-auto-rows: 120px; /* rigid height for all cards */
+       gap: 16px; /* space between cards */
+       width: 100%;
+}
+.stat-card {
+         background-color: #fff;         /* White card */
+         border-radius: 10px;
+         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+         overflow: hidden;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         transition: transform 0.2s;
+         text-align: center;
+    }
+.stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.stat-card h4{
+         font-size: 1rem;
+         font-weight: bold;
+         margin-bottom: 10px;
+         color: #333333
+}
+.stat-card p {
+         font-size: 1.8rem;
+         font-weight: bold;
+         color: #111111;
+}
+.stat-card.green {
+        border-top: 4px solid #28a745;
+}
+.stat-card.purple {
+        border-top: 4px solid #6f42c1;
+}
+.stat-card.red {
+        border-top: 4px solid #dc3545;
+}
+.stat-card.fire {
+        border-top: 4px solid #fd7e14;
+}
+h2 {
+        text-align: center;
+        margin-bottom: 10px;
+}
+p {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #555;
+}
+.progress-box {
+        margin-bottom: 30px;
+}
+.progress-bar {
+        width: 100%;
+        background-color: #e9ecef;
+        border-radius: 8px;
+        overflow: hidden;
+        height: 20px;
+}
+.progress-fill {
+        height: 100%;
+        background-color: #007bff;
+        width: 0;
+        transition: width 0.5s ease-in-out;
+}
+
+/* Date + Streak Row */
+.date-streak-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0 25px;
+    font-size: 0.8rem;
+    color: #333;
+    width: 100%;
+}
+.date-streak-row .cur_Date {
+    margin-left: 10px;
+}
+.date-streak-row .cur_Date {
+    font-weight: bold;
+}
+/* Today's Words Section */
+.words-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 20px;
+}
+
+.word-box {
+    border: 2px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.word-box h4 {
+    color: #e53935;
+}
+
+.btn-group {
+    margin-top: 10px;
+}
+
+.known-btn {
+    background: #4CAF50;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.unknown-btn {
+    background: #f44336;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+}
+.word-section {
+    margin-top: 30px;
+}
+.word-section h3 {
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+        .stat-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 180px;
+        }
+        .main-content {
+            margin-left: 0;
+            padding: 10px;
+        }
+        .dashboard-container {
+            padding: 10px;
+        }
+        .stat-card h4 {
+            font-size: 1rem;
+        }
+        .stat-card p {
+            font-size: 1.5rem;
+        }
+        .word-section {
+            margin-top: -2lvh ;
+        }
+        .date-streak-row {
+            font-size: 0.7rem;
+            margin-bottom: 20px;
+        }
+
+         .word-section h3 {
+            font-size: 1rem;
+        }
+
+        }
+        .progress-box {
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            height: 15px;
+        }
+        .progress-fill {
+            height: 100%;
+        }
+        .stat-card.green {
+            border-top: 4px solid #28a745;
+        }
+        .stat-card.purple {
+            border-top: 4px solid #6f42c1;
+        }
+        .stat-card.red {
+            border-top: 4px solid #dc3545;
+        }
+        .stat-card.fire {
+            border-top: 4px solid #fd7e14;
+        }
+        .word-card.green-border {
+            border: 1.5px solid #28a745;
+        }
+        .word-card.red-border {
+            border: 1.5px solid #dc3545;
+        }
+        .word-section h3 {
+            font-size: 1rem;
+        }
+</style>
+            <h2>Dashboard</h2>
+                        <p>Welcome to your dashboard!</p>
+<div class="main-content">
+    <div class="dashboard-container">
+
+        <div class="stat-grid">
+            <div class="stat-card green">
+                <h4>Total</h4>
+                <p>{{ total }}</p>
+            </div>
+
+            <div class="stat-card purple">
+                <h4>Known</h4>
+                <p>{{ known }}</p>
+            </div>
+
+            <div class="stat-card red">
+                <h4>Unknown</h4>
+                <p>{{ unknown }}</p>
+            </div>
+
+            <div class="stat-card fire">
+                <h4>Accuracy</h4>
+                <p>{{ accuracy }}%</p>
+            </div>
+        </div>
+
+       <div class="progress-box">
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ accuracy }}%"></div>
+    </div>
+</div>
+
+<!-- DATE + STREAK ROW -->
+<div class="date-streak-row">
+    <span class="cur_Date">Date: {{ current_date }}</span>
+    <span class="streak">🔥 Your Current Streak: {{ streak }} days</span>
+</div>
+
+<h3 style="text-align:center; color:red;">Today's Words</h3>
+
+<div class="words-grid">
+    {% for w in words %}
+    <div class="word-box">
+        <h4>{{ w[1] }}</h4>
+
+        <p><b>Meaning:</b> {{ w[2] }}</p>
+        <p><b>Part of Speech:</b> {{ w[3] }}</p>
+        <p><b>Synonym:</b> {{ w[4] }}</p>
+        <p><b>Antonym:</b> {{ w[5] }}</p>
+        <p><b>Example:</b> {{ w[6] }}</p>
+
+        <div class="btn-group">
+            <form action="/update-word" method="POST">
+                <input type="hidden" name="word_id" value="{{ w[0] }}">
+                <button name="status" value="known" class="known-btn">Known</button>
+                <button name="status" value="unknown" class="unknown-btn">Unknown</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+    </div>  
+{% endblock %} #}
+
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+/* ================= MAIN LAYOUT ================= */
+.main-content {
+    margin-left: 240px;
+    padding: 20px 30px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.dashboard-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ================= STAT CARDS ================= */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 20px;
+}
+.stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        color: rgb(154, 16, 189);
+}
+
+.stat-card h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.green { border-top: 4px solid #28a745; }
+.purple { border-top: 4px solid #6f42c1; }
+.red { border-top: 4px solid #dc3545; }
+.fire { border-top: 4px solid #fd7e14; }
+
+/* ================= PROGRESS ================= */
+.progress-bar {
+    background: #eceaec;
+    height: 18px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-fill {
+    background: #137dee;
+    height: 100%;
+    width: {{ accuracy }}%;
+}
+
+/* ================= DATE & STREAK ================= */
+.date-streak-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0 25px;
+    font-size: 0.8rem;
+    color: #333;
+    width: 100%;
+}
+.date-streak-row .cur_Date {
+    margin-left: 10px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* ================= WORDS ================= */
+.words-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.word-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1.5px solid #ddd;
+}
+
+.word-box h4 {
+    color: #e53935;
+    margin-bottom: 8px;
+}
+
+.word-box p {
+    font-size: 0.85rem;
+    margin: 4px 0;
+}
+
+/* ================= BUTTONS ================= */
+.btn-group {
+    margin-top: 10px;
+}
+
+.known-btn,
+.unknown-btn {
+    border: none;
+    padding: 6px 12px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.known-btn { background: #28a745; }
+.unknown-btn { background: #dc3545; }
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+    .main-content { margin-left: 0; padding: 10px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .words-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="main-content">
+<div class="dashboard-container">
+
+    <h2 style="text-align:center;">Dashboard</h2>
+    <p style="text-align:center;">Welcome to your dashboard!</p>
+
+    <!-- STATS -->
+    <div class="stat-grid">
+        <div class="stat-card green">
+            <h4>Total</h4><p>{{ total }}</p>
+        </div>
+        <div class="stat-card purple">
+            <h4>Known</h4><p>{{ known }}</p>
+        </div>
+        <div class="stat-card red">
+            <h4>Unknown</h4><p>{{ unknown }}</p>
+        </div>
+        <div class="stat-card fire">
+            <h4>Accuracy</h4><p>{{ accuracy }}%</p>
+        </div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <!-- DATE + STREAK -->
+    <div class="date-streak-row">
+        <span class="cur_Date">today: {{ today }}</span>
+        <span>🔥 Streak: {{ streak }} days</span>
+    </div>
+
+    <!-- WORDS -->
+    <h3 style="text-align:center;color:red;">Today's Words</h3>
+
+    {% if words %}
+    <div class="words-grid">
+        {% for word in words %}
+        <div class="word-box">
+            <h4>{{ word[1] }}</h4>
+
+            <p><b>Meaning:</b> {{ word[2] }}</p>
+            <p><b>Part of Speech:</b> {{ word[3] }}</p>
+            <p><b>Synonym:</b> {{ word[4] }}</p>
+            <p><b>Antonym:</b> {{ word[5] }}</p>
+            <p><b>Example:</b> {{ word[6] }}</p>
+
+            <form action="/update-word" method="POST" class="btn-group">
+                <input type="hidden" name="word_id" value="{{ word[0] }}">
+                <button type="submit" name="status" value="known" class="known-btn">Known</button>
+                <button type="submit" name="status" value="unknown" class="unknown-btn">Unknown</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p style="text-align:center;color:gray;">No words for today</p>
+    {% endif %}
+
+</div>
+</div>
+<script>
+function markWord(word, status) {
+  fetch('/update_word_status', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ word: word, status: status })
+   }).then(() => location.reload());
+}
+</script>
+{% endblock %}

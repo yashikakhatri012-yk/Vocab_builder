@@ -1,0 +1,64 @@
+word,part_of_speech,eng_meaning,synonym,antonym,example,level
+Acquire,VERB,obtain,"gain, collect",lose,He acquired a lot of knowledge from his experiences.,A1
+Benefit,NOUN,advantage,"profit, gain",loss,Regular exercise has many health benefits.,A1
+Curious,ADJ,inquisitive,"eager, interested",indifferent,The child was curious to know how airplanes fly.,A1
+Deny,VERB,refuse,"reject, decline",accept,He denied all the allegations made against him.,A1
+Evaluate,VERB,assess,"judge, examine",ignore,The teacher will evaluate the students’ projects tomorrow.,A1
+Faithful,ADJ,loyal,"devoted, true",unfaithful,A faithful friend stands by you in difficult times.,A1
+Genuine,ADJ,authentic,"real, true",fake,Always buy genuine products from trusted sellers.,A1
+Imply,VERB,suggest,"indicate, hint",declare,His tone implied that he was not happy with the result.,A1
+Logical,ADJ,rational,"reasonable, sensible",illogical,She gave a logical explanation for her decision.,A1
+Modify,VERB,alter,"adjust, revise",preserve,The company decided to modify all gadgets.,A1
+Able,ADJ,capable,"efficient, competent",incapable,She is able to solve tough problems.,A1
+Bold,ADJ,fearless,"daring, brave",timid,He made a bold decision in crisis.,A1
+Careful,ADJ,cautious,"alert, watchful",careless,Be careful while crossing the road.,A1
+Dear,ADJ,beloved,"loved, cherished",hated,She is very dear to her parents.,A1
+Empty,ADJ,vacant,"blank, void",full,The glass is empty.,A1
+Fresh,ADJ,new,"recent, clean",stale,He brought fresh fruits from the market.,A1
+Glad,ADJ,happy,"pleased, delighted",sad,I am glad to see you succeed.,A1
+Honest,ADJ,truthful,"sincere, upright",dishonest,An honest person never fears anyone.,A1
+Lazy,ADJ,idle,"sluggish, inactive",active,He failed because he was lazy.,A1
+Strong,ADJ,powerful,"sturdy, tough",weak,Regular exercise makes the body strong.,A1
+Brave,ADJ,courageous,"bold, fearless",cowardly,The brave soldier protected his country.,A1
+Bright,ADJ,shining,"radiant, smart",dull,She has a bright smile.,A1
+Busy,ADJ,engaged,"occupied, active",idle,He is busy with his office work.,A1
+Clean,ADJ,pure,"neat, tidy",dirty,Keep your surroundings clean.,A1
+Deep,ADJ,profound,"intense, thorough",shallow,The lake is deep and dangerous.,A1
+Early,ADJ,prompt,"quick, advance",late,He reached school early today.,A1
+Fair,ADJ,just,"honest, impartial",unfair,The judge gave a fair decision.,A1
+Sweet,ADJ,sugary,"pleasant, delightful",bitter,The mangoes are very sweet this season.,A1
+Active,ADJ,energetic,"lively, dynamic",lazy,She is an active member of the club.,A1
+Big,ADJ,large,"huge, massive",small,They live in a big city.,A1
+Cold,ADJ,chilly,"cool, frosty",hot,The weather is cold today.,A1
+Dark,ADJ,dim,"gloomy, shadowy",bright,It was dark outside after sunset.,A1
+Fast,ADJ,quick,"rapid, speedy",slow,He runs faster than anyone else in class.,A1
+Happy,ADJ,joyful,"pleased, delighted",sad,The children were happy after winning the match.,A1
+Kind,ADJ,generous,"helpful, gentle",cruel,Be kind to animals and the poor.,A1
+Neat,ADJ,tidy,"clean, orderly",messy,He keeps his desk neat and clean.,A1
+Abandon,VERB,leave,"desert, quit",continue,The villagers had to abandon their homes during the flood.,A2
+Bliss,NOUN,joy,"happiness, delight",misery,Spending time with family gives me pure bliss.,A2
+Capture,VERB,seize,"grab, arrest",release,The police captured the thief after a long chase.,A2
+Dedicate,VERB,devote,"commit, surrender",neglect,She dedicated her life to helping the poor.,A2
+Expand,VERB,enlarge,"grow, increase",shrink,The company plans to expand its business overseas.,A2
+Frustrate,VERB,disappoint,"upset, discourage",satisfy,Continuous failures can frustrate even the strongest minds.,A2
+Inspire,VERB,motivate,"encourage, influence",discourage,Great leaders inspire people to work for a better future.,A2
+Obstacle,NOUN,hindrance,"barrier, block",support,Hard work can overcome every obstacle in life.,A2
+Predict,VERB,foresee,"forecast, anticipate",doubt,Scientists can predict weather changes accurately.,A2
+Restore,VERB,recover,"renew, rebuild",destroy,The government plans to restore the old heritage buildings.,A2
+Assist,VERB,help,"aid, support",hinder,The nurse assisted the doctor during the surgery.,A2
+Brilliant,ADJ,outstanding,"bright, intelligent",dull,She gave a brilliant performance on stage.,A2
+Commit,VERB,dedicate,"pledge, devote",neglect,He committed himself to completing the project on time.,A2
+Defeat,VERB,overcome,"beat, conquer",lose,The team defeated their rivals in the final match.,A2
+Efficient,ADJ,capable,"effective, skilled",incompetent,She is an efficient worker who completes tasks quickly.,A2
+Forgive,VERB,pardon,"excuse, absolve",blame,It’s wise to forgive others and move on.,A2
+Humiliate,VERB,insult,"embarrass, degrade",respect,The teacher never humiliates students for their mistakes.,A2
+Influence,VERB,affect,"inspire, sway",discourage,Good books can positively influence young minds.,A2
+Occupy,VERB,engage,"fill, inhabit",vacate,He occupied himself with reading during the long flight.,A2
+Strengthen,VERB,reinforce,"fortify, support",weaken,Regular exercise helps to strengthen the muscles.,A2
+Achieve,VERB,attain,"accomplish, gain",fail,She worked hard to achieve her dream of becoming a doctor.,A2
+Balance,NOUN,stability,"harmony, poise",imbalance,A balance between work and rest is essential for good health.,A2
+Courage,NOUN,bravery,"boldness, fearlessness",cowardice,The firefighter showed great courage while saving lives.,A2
+Deliver,VERB,distribute,"supply, convey",withhold,The postman delivers letters every morning.,A2
+Enhance,VERB,improve,"boost, enrich",reduce,Reading regularly can enhance your vocabulary.,A2
+Grateful,ADJ,thankful,"obliged, appreciative",ungrateful,I am grateful for your constant support and guidance.,A2
+Hostile,ADJ,unfriendly,"antagonistic, aggressive",friendly,The environment became hostile due to continuous conflict.,A2

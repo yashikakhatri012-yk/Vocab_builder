@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Zone | Vocab Builder</title>
+  {# <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> #}
+</head>
+
+<body class="main-body">
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 6lvh;
+        text-align: center;
+    }
+   .progress-box {
+        margin-bottom: 30px;
+    }
+    .progress-bar {
+        width: 100%;
+        background-color: #e9ecef;
+        border-radius: 8px;
+        overflow: hidden;
+        height: 20px;
+    }
+    .progress-fill {
+        height: 100%;
+        background-color: #007bff;
+        width: 0;
+        transition: width 0.5s ease-in-out;
+    }
+    .word-section {
+        margin-bottom: 30px;
+    }
+    .word-section h3 {
+        margin-bottom: 15px;
+    }
+    .word-card {
+    display: inline-block;
+    background: white;
+    padding: 8px 14px;
+    margin: 5px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-size: 0.95rem;
+    }
+    .word-card.red-border {
+        border: 2px solid #dc3545;
+    }
+    .word-card.green-border {
+        border: 2px solid #28a745;
+    }
+    .test-card {
+        background: white;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .test-card p {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    .test-card input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+    }
+    .start-btn, .submit-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        text-align: justify;
+    }
+    .start-btn {
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+    .submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    } 
+  /* Containers */
+  .mcq-container,
+  .test-container {
+    width: 100%;
+    padding: 0;
+  }
+  .mcq-card {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .timer {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    left: 10lvh;
+  }
+  .question {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  .option {
+    display: block;
+    margin-bottom: 10px;
+    padding: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  .option:hover {
+    background-color: #f1f1f1;
+  }         
+  .option input {
+    margin-right: 10px;
+    transform: scale(1.5);
+  }
+  .
+  @media (max-width: 768px) {
+         body {padding: 12px;}
+        h2, h3 {font-size: 1.2rem;}
+  }
+  @media (max-width: 768px) {
+
+  .mcq-card {
+    padding: 16px;
+  }
+
+  .question {
+    font-size: 1rem;
+  }
+
+  .option {
+    padding: 14px;
+    font-size: 0.95rem;
+  }
+
+  .option input {
+    transform: scale(1.2);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.05rem;
+  }
+}
+@media (max-width: 768px) {
+  .timer {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-radius: 0 0 12px 12px;
+    text-align: center;
+  }
+  .progress-box {
+            margin-bottom: 20px;
+  }
+  .progress-bar {
+            height: 15px;
+  }
+  .progress-fill {
+            height: 100%;
+  }
+  .word-card {
+            border-top: 4px solid #fd7e14;
+  }
+  .word-card.green-border {
+            border: 1.5px solid #28a745;
+  }
+  .word-card.red-border {
+            border: 1.5px solid #dc3545;
+        }
+}
+</style>
+
+<h2>Test Zone</h2>
+
+<!-- ===== Stats ===== -->
+{# <div class="stat-grid">
+            <div class="stat-card green">
+                <h4>Total</h4>
+                <p>{{ total }}</p>
+            </div>
+
+            <div class="stat-card purple">
+                <h4>Known</h4>
+                <p>{{ known }}</p>
+            </div>
+
+            <div class="stat-card red">
+                <h4>Unknown</h4>
+                <p>{{ unknown }}</p>
+            </div>
+
+            <div class="stat-card fire">
+                <h4>Accuracy</h4>
+                <p>{{ accuracy }}</p>
+            </div>
+        </div> #}
+</div>
+<div class="progress-box">
+<div class="progress-bar">
+    <div class="progress-fill" data-width="{{ accuracy }}"></div>>
+</div>
+
+<!-- ===== CEFR FILTER ===== -->
+<form method="GET" action="{{ url_for('test') }}">
+  <select name="level">
+    <option value="A1,A2">Beginner (A1–A2)</option>
+    <option value="B1,B2">Intermediate (B1–B2)</option>
+    <option value="C1,C2">Advanced (C1–C2)</option>
+  </select>
+</form>
+
+<!-- ===== START BUTTON ===== -->
+<button id="startBtn" class="start-btn">Start Test</button>
+
+<!-- ===== TIMER ===== -->
+<div id="timer" style="display:none; font-size:18px; font-weight:600;">
+  Time Left: <span id="time">10:00</span>
+</div>
+
+<!-- ===== MCQ FORM ===== -->
+<form method="POST" action="{{ url_for('submit_mcq') }}" id="testForm" style="display:none;">
+    {% for word in words %}
+      <div class="mcq-card">
+      <div class="question">{{ word.eng_meaning }}</div>
+      {% for word in questions %}
+        <p><b>{{ loop.index }}. {{ word.word }}</b></p>
+      {% endfor %}
+      {% for opt in word.options %}
+        <label>
+          <input type="radio" name="{{ word.id }}" value="{{ opt }}" required>
+          {{ opt }}
+        </label><br>
+      {% endfor %}
+    </div>
+    <hr>
+    {% endfor %}
+  <button type="submit" class="submit-btn">Submit Test</button>
+</form>
+
+<!-- ===== TIMER SCRIPT ===== -->
+<script>
+let time = 600;
+let interval;
+
+document.getElementById("startBtn").onclick = function () {
+  this.style.display = "none";
+  document.getElementById("timer").style.display = "block";
+  document.getElementById("testForm").style.display = "block";
+
+  interval = setInterval(() => {
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
+    document.getElementById("time").innerText =
+      `${min}:${sec < 10 ? "0" : ""}${sec}`;
+    time--;
+
+    if (time < 0) {
+      clearInterval(interval);
+      document.getElementById("testForm").submit();
+    }
+  }, 1000);
+};
+// Progress Bar Animation
+window.onload = function() {
+    const progressFill = document.querySelector('.progress-fill');
+    const width = progressFill.getAttribute('data-width');
+    progressFill.style.width = width + '%';
+};
+</script>
+</body>
+</html>

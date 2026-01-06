@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vocab Builder</title>
+    {# <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> #}
+</head>
+<body>
+<style>
+    .main-body {   
+        margin: 0;
+        background-color: #f8f9fa;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 6lvh;
+    }
+    .sidebar {
+        height: 100vh;
+        width: 220px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #343a40;
+        padding-top: 20px;
+    }
+    .sidebar h2 {
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .sidebar h2 span {
+        color: #007bff;
+    }
+    .sidebar a {
+        display: block;
+        color: #ffffff;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 1.1rem;
+    }
+    .sidebar a:hover {
+        background-color: #495057;
+    }
+    .sidebar a.logout {
+        position: absolute;
+        bottom: 40px;
+        width: 180px;
+        right: 11px;
+        background-color: #dc3545;
+        text-align: center;
+        border-radius: 5px;
+    }
+    .ICONS {
+        color: white;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: calc(100% - 220px);
+            left: 218px;
+            font-size: 1rem;
+        }
+        * RESPONSIVE */
+@media (max-width: 768px) {
+    .main-body {
+        padding: 4lvh;
+    }
+    .sidebar {
+        width: 180px;
+        padding: 15px;
+    }
+    .sidebar h2 {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+    .sidebar h2 span {
+        font-size: 1.2rem;
+    }
+    .sidebar a {
+        font-size: 1rem;
+        padding: 10px;
+    }
+    .sidebar a:hover {
+        background-color: #495057;
+    }
+    .sidebar a.logout {
+        width: 140px;
+        right: 7px;
+    }
+    .ICONS {
+        
+    }
+    footer {
+        text-align: center;
+        width: calc(100% - 180px);
+        left: 179px;
+    }
+}   
+</style>
+     <div class="sidebar">
+    <h2>vocab<span>builder</span></h2>
+    <h3>ICONS</h3>
+    <a href="/Dashboard">Dashboard</a>
+    <a href="/test">testzone</a>
+    <a href="/setting">Setting</a>
+    <a href="/logout" class="logout">Logout</a>
+</div>
+<div class="main-body">
+    {% block content %}{% endblock %}
+</div>
+    <footer>
+        <p> • Learn words scientifically • not randomly • Smart revision • Exam focused • Long-term memory</p>
+    </footer>
+</body>
+</html>
+

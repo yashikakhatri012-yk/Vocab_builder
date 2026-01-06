@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login | Vocab Builder</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+</head>
+<body class="auth-body">
+
+<div class="auth-box">
+    <h2>Login</h2>
+    <style>
+        .auth-body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .auth-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .auth-box h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .auth-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .auth-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .auth-box button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 400px) {
+           .auth-body {
+                padding: 10px;
+            }
+           
+            .auth-box {
+                width: 90%;
+            }
+            .auth-box h2 {
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            .auth-box input {
+                width: 100%;
+            }
+            .auth-box button {
+                width: 100%;
+            }
+        }
+    </style>
+    <form method="POST">
+        <label for="email">Email address</label>
+       <input type="email" name="username" placeholder="Email" required>
+        <br>
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Password" required>
+        <br>    
+        <button type="submit">Login</button>
+    </form>
+   <p>New user? <a href="/signup">Sign up</a></p>
+</div>
+</body>
+</html>

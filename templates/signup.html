@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup | Vocab Builder</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+</head>
+<body class="auth-body">
+
+<div class="auth-box">
+    <style>
+        .auth-body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .auth-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .auth-box h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .auth-box input, .auth-box select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .auth-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .auth-box button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 400px) {
+           .auth-body {
+                padding: 10px;
+            }
+           
+            .auth-box {
+                width: 90%;
+            }
+            .auth-box h2 {
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            .auth-box input, .auth-box select {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            .auth-box button {
+                width: 100%;
+                padding: 10px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .auth-box button:hover {
+                background-color: #0056b3;
+            }
+        }
+    </style>
+    <h2>Create Account</h2>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Full Name" required>
+
+        <select name="exam">
+            <option>NDA</option>
+            <option>CAT</option>
+            <option>SAT</option>
+            <option>DET</option>
+            <option>English Proficiency</option>
+            <option>Other</option>
+        </select>
+
+        <input type="number" name="word_limit" placeholder="Daily word limit" required>
+        <input type="date" name="start_date">
+        <input type="date" name="end_date">
+
+        <input type="email" name="username" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+
+        <button type="submit">Sign Up</button>
+    </form>
+<a href="/">Already have an account? Login</a>
+</div> 
+</body>
+</html>
