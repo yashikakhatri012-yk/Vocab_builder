@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Dictionary · Vocab Builder{% endblock %}
+{% block page_eyebrow %}Dictionary{% endblock %}
+{% block content %}
+<div class="page narrow-page">
+  <section class="hero compact-hero">
+    <div>
+      <p class="eyebrow">DICTIONARY</p>
+      <h1>Turn curiosity into memory.</h1>
+      <p>Look up a word, hear it, understand it, and keep moving.</p>
+    </div>
+  </section>
+
+  <form class="lookup-bar" method="GET" action="{{ url_for('lookup') }}" role="search">
+    <input name="word" value="{{ query }}" placeholder="Search any English word…" autocomplete="off" autofocus aria-label="Search a word">
+    <button class="button" type="submit">Search <span>→</span></button>
+  </form>
+
+  {% if query and result %}
+  <article class="lookup-result">
+    <div class="word-meta"><span class="level">{{ result.level or 'B1' }}</span><span class="pos">{{ result.part_of_speech or 'Vocabulary' }}</span></div>
+    <div class="lookup-heading">
+      <div>
+        <h2>{{ result.word }}</h2>
+        {% if result.phonetic %}<div class="pronunciation">{{ result.phonetic }}</div>{% endif %}
+      </div>
+      {% if result.audio_url %}<button class="audio-button" type="button" data-audio="{{ result.audio_url }}" aria-label="Play pronunciation">▶</button>{% endif %}
+    </div>
+    <p class="lookup-meaning">{{ result.meaning }}</p>
+    <div class="word-details">
+      <div class="detail"><label>Synonyms</label><p>{{ result.synonym or '—' }}</p></div>
+      <div class="detail"><label>Antonyms</label><p>{{ result.antonym or '—' }}</p></div>
+    </div>
+    {% if result.example %}<div class="example"><strong>In context:</strong> {{ result.example }}</div>{% endif %}
+    <div class="lookup-source">{{ result.source or 'Vocab Builder library' }} · saved locally for faster future searches</div>
+  </article>
+  {% elif query %}
+  <div class="empty"><strong>We couldn't find “{{ query }}”.</strong><br>Check the spelling or try a different word.</div>
+  {% else %}
+  <div class="empty"><strong>Search, learn, remember.</strong><br>Your recent discoveries can become part of your local vocabulary library.</div>
+  {% endif %}
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+document.querySelectorAll('[data-audio]').forEach(btn => {
+  btn.addEventListener('click', () => new Audio(btn.dataset.audio).play().catch(() => {}));
+});
+</script>
+{% endblock %}

@@ -1,78 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Result</title>
-</head>
-<body>
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: Arial, Helvetica, sans-serif;
-            padding: 6lvh;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-        }
-        h2 {
-            color: #555;
-        }
-        .result-card { padding: 15px; background: #fff; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
-        .correct { color: green; font-weight: bold; }
-        .incorrect { color: red; font-weight: bold; }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
-        a:hover {
-            background-color: #0056b3;
-        }
-        @media (max-width: 400px) {
-            body {
-                padding: 10px;
-            }
-            h1 {
-                font-size: 1.5rem;
-            }
-            h2 {
-                font-size: 1.2rem;
-            }
-            .result-card {
-                padding: 10px;
-            }
-            .correct { font-size: 0.9rem; color: green; }
-            .incorrect { font-size: 0.9rem; color: red; }
-
-            a {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-            }
-            a:hover {
-                background-color: #0056b3;
-            }
-
-        }
-</style>
-    <hr>
-    {% for r in results %}
-        <div class="result-card">
-            <p><b>{{ loop.index }}. {{ r.word }}</b></p>
-            <p>Your answer: <span class="{{ 'correct' if r.is_correct else 'incorrect' }}">{{ r.selected }}</span></p>
-            {% if not r.is_correct %}
-                <p>Correct answer: <span class="correct">{{ r.correct }}</span></p>
-            {% endif %}
-        </div>
-    {% endfor %}
-    <a href="{{ url_for('home') }}">Take Test Again</a>
-</body>
-
-</html>
-  
+{% extends "base.html" %}
+{% block title %}Test result · Vocab Builder{% endblock %}
+{% block page_eyebrow %}Result{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="result-card">
+    <p class="eyebrow">TEST COMPLETE</p>
+    <div class="score-ring">{{ percentage }}%</div>
+    <h1 style="font-family:'Plus Jakarta Sans';margin:0 0 7px;letter-spacing:-.7px">{% if percentage >= 80 %}Strong recall.{% elif percentage >= 60 %}Good progress.{% else %}Keep the rhythm.{% endif %}</h1>
+    <p style="color:var(--muted);font-size:12px;margin:0">You scored <strong>{{ score }}/{{ total }}</strong>. Missed words are back in your reinforcement cycle.</p>
+    <div class="result-list">
+      {% for r in results %}
+      <div class="result-row">
+        <div><strong>{{ loop.index }}. {{ r.word }}</strong><div style="margin-top:5px;color:var(--muted)">{{ r.level }}</div></div>
+        <div style="text-align:right"><div>Your answer: <span class="{{ 'correct' if r.is_correct else 'incorrect' }}">{{ r.selected }}</span></div>{% if not r.is_correct %}<div style="margin-top:4px">Correct: <span class="correct">{{ r.correct }}</span></div>{% endif %}</div>
+      </div>
+      {% endfor %}
+    </div>
+    <div style="display:flex;gap:9px;justify-content:center;margin-top:22px;flex-wrap:wrap"><a class="button" href="{{ url_for('Dashboard') }}">Back to dashboard</a><a class="button secondary" href="{{ url_for('test') }}">Try another test</a></div>
+  </div>
+</div>
+{% endblock %}

@@ -1,64 +1,124 @@
-#  Vocabulary Builder ( Production in Progess)
+# Vocab Builder
 
-A web application that helps students improve their vocabulary in a structured and time-efficient way.
+A focused vocabulary learning app built with Flask and MySQL. V2 combines daily vocabulary, spaced repetition, practice tests, progress tracking, and a cached live dictionary lookup in one minimal learning workspace.
 
-👨‍💻 Project status:under development 
+## What V2 adds
 
-## 🚀 Problem
-While preparing for competitive exams like the SAT, I struggled to learn vocabulary from multiple sources. There was no single place that offered daily words with revision. This project was built to solve that problem.
+- Minimal, responsive dashboard and mobile navigation
+- Daily learning queue with difficult/review words prioritized
+- Spaced repetition with interval + ease-factor scheduling
+- 10-question, 10-minute practice tests with A1–A2 / B1–B2 / C1–C2 filters
+- Score history and learning statistics
+- Live dictionary lookup with phonetics, examples, synonyms, antonyms, and optional pronunciation audio
+- Local dictionary cache so repeated lookups do not repeatedly hit third-party APIs
+- Controlled vocabulary ingestion from external lexical data into the local MySQL library
+- Application-side upstream API budget (`WORD_API_CALLS_PER_HOUR`, default 30 calls/hour)
+- Environment-based secrets/configuration instead of hard-coded database credentials
+- Basic account validation and duplicate-account handling
 
-## 💡 Solution
- Vocabulary Builder provides:
-- 10 new words every day
-- Meanings and example sentences
-- Synonyms and antonyms
-- Weekly revision using spaced repetition
-- Simple, student-friendly interface
+## Architecture
 
-## 🛠️ Tech Stack
-- Python
-- Flask
-- HTML, CSS, JavaScript
-- CSV / MySQL (for word storage)
-  
-## ✨ Features
-- Daily word rotation logic
-- User progress tracking/ streaks 
-- spaced repetition for strong revision which fortify users vocabulary size
-- weekly 10 min test based on CEFR level
-- Clean web UI for learning
+```text
+Flask routes / Jinja templates
+        |
+        +-- MySQL learning state
+        |
+        +-- Services/Spaced_repetition.py
+        |
+        +-- Services/word_ingestion.py
+                |
+                +-- Datamuse: candidate word discovery
+                +-- Free Dictionary API: definitions / phonetics / audio
+                +-- MySQL cache + request budget
+```
 
-## Pictures of web page 
-- <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/43692b0f-9a05-44ae-8ac7-5a67901fc2ff" />
--<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/83213650-43a9-4f97-acb5-64f304c53288" />
--<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/70d85ac4-9fbb-4bb6-88b0-c18f3fef4190" />
--<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/63f4d690-5657-4680-b526-956852ae0460" />
--<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/f4f9bec0-a958-4560-b25d-9a11661dfaf8" />
--<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/0fcb366f-9799-4c70-aea5-f0da942fb932" />
+Datamuse is used for lexical discovery. The Free Dictionary API exposes English dictionary data and phonetic/audio information. The V2 application never exposes those third-party endpoints directly to the browser for normal dictionary lookups; the server fetches and caches results. citeturn987020search0turn949228search0
 
-## 📈 Future Improvements
-- Multi-language support
-- Mobile-friendly version
-- AI system integration 
-- Dictionary API addition
-- 
-Installation 
-1 **Clone the repository**:
-```bash 
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+## Setup
 
-2. Create a virtual environment (optional but recommended): 
+### 1. Clone
+
+```bash
+git clone https://github.com/new-experimental/Vocab_builder.git
+cd Vocab_builder
+```
+
+### 2. Environment
+
+Create environment variables for your deployment:
+
+```text
+SECRET_KEY=replace-with-a-long-random-secret
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PASSWORD=your-password
+MYSQL_DB=vocabulary
+WORD_API_CALLS_PER_HOUR=30
+WORD_API_TIMEOUT=5
+MAINTENANCE_TOKEN=replace-with-a-private-token
+```
+
+### 3. Install dependencies
+
+```bash
 python -m venv venv
-source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate
- 
-3.Install dependencies:
+source venv/bin/activate
 pip install -r requirements.txt
+```
 
-▶️ How to Run
-bash
+### 4. Database migration
+
+Start with the existing `db.sql`, then run:
+
+```bash
+mysql -u root -p < migrations/001_vocab_v2.sql
+```
+
+The migration adds optional word metadata, a dictionary cache, API request accounting, and indexes for growing word/review tables.
+
+### 5. Run
+
+```bash
 python app.py
+```
 
-Open your browser and go to:
-http://127.0.0.1:5000/
+Open `http://127.0.0.1:5000/`.
+
+## Keeping the word library growing
+
+The repository includes:
+
+```bash
+python scripts/replenish_words.py --count 10
+```
+
+For production, run this periodically with cron or the equivalent scheduler. The ingestion service discovers candidate vocabulary, checks for duplicates, fetches definitions, stores normalized data locally, and respects the application-wide upstream request budget.
+
+Example cron schedule:
+
+```cron
+0 */8 * * * cd /path/to/Vocab_builder && /path/to/venv/bin/python scripts/replenish_words.py --count 10 >> /var/log/vocab-builder-replenish.log 2>&1
+```
+
+The web app also exposes a protected maintenance endpoint for hosted schedulers:
+
+```bash
+curl -X POST \
+  -H "X-Maintenance-Token: $MAINTENANCE_TOKEN" \
+  -d "count=10" \
+  https://your-domain.example/maintenance/replenish
+```
+
+## API behavior
+
+The dictionary lookup is deliberately server-side and cache-first. A cached word can be served without an upstream call. Uncached calls are counted in `api_request_log`, and once the configured hourly budget is reached, the application stops making more upstream requests until the budget window moves.
+
+The external dictionary source does **not** provide a verified CEFR level in the returned data, so newly ingested words use a conservative `B1` default rather than inventing a CEFR classification. They can be reclassified later when a trusted level source is introduced.
+
+## Security notes
+
+Never commit real database passwords, API credentials, or `MAINTENANCE_TOKEN` values. The V2 application reads secrets from environment variables and the maintenance endpoint requires a secret request header.
+
+## Project status
+
+V2 is under active development. Test against the actual production MySQL schema before merging the upgrade branch into `master`.

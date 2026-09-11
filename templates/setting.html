@@ -1,103 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Setting | Vocab Builder</title>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
-</head>
-<body class="main-body">
-<h2>Setting</h2>
-<style>
-    body {
-        background-color: #f8f9fa;
-        font-family: Arial, Helvetica, sans-serif;
-        padding: 9lvh;
-    
-    }
-    .form-group {
-        margin-bottom: 1%;
-        margin-top: -24lvh;
-    }
-    label {
-        display: inline-flex;
-        margin-top: -24lvh;
-        font-weight: bold;
-    }
-    input, select {
-        width: 95%;
-        padding: 1rem;
-        bottom: 200px;
-        border: 3px solid #ced4da;
-        border-radius: 1rem;
-    }
-    button {
-        align-content: center;
-        padding: 0.5rem 1rem;
-        background-color: #2594c7;
-        color: white;
-        border: none;
-        border-radius: 0.25rem;
-        cursor: pointer;
-    }   
-    button:hover {
-        background-color: #f50ece;
-    }
-    @media (max-width: 600px) {
-        body {
-            padding: 3lvh;
-        }
-         .form-group {
-            margin-top: 0;
-        }
-        label {
-            margin-top: 0;
-        }
-        input, select {
-            width: 100%;
-        }
-        button {
-            width: 100%;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-        button:hover {
-            background-color: #f50ece;
-        }
-    }
-</style>
-<form method="POST">
-    <label>Change Exam</label>
-    <select name="exam">
-            <option>NDA</option>
-            <option>CAT</option>
-            <option>SAT</option>
-            <option>DET</option>
-            <option>English Proficiency</option>
-            <option>Other</option>
-    </select>
-</form> 
-
-<form method="POST">
-    <label>Change Daily Word Limit</label>
-    <input type="number" name="word_limit">
-    <label>Font Style</label>
-    <select name="font">
-        <option>Poppins</option>
-        <option>Inter</option>
-        <option>Roboto</option>
-    </select>
-</form>
-<form>
-    <label>Change Date Range</label>
-    <input type="date" name="start_date">
-    <input type="date" name="end_date">
-</form>
-<form>
-    <label>Change Password</label>
-    <input type="password" name="current_password" placeholder="Current Password">
-    <input type="password" name="new_password" placeholder="New Password">
-    <input type="password" name="confirm_password" placeholder="Confirm New Password">
-</form>
-<button type="submit">Save Changes</button> 
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Settings · Vocab Builder{% endblock %}
+{% block page_eyebrow %}Settings{% endblock %}
+{% block content %}
+<div class="page">
+  <section class="hero"><div><p class="eyebrow">PERSONALIZE</p><h1>Your learning settings</h1><p>Keep your goal, daily workload, and study window up to date.</p></div></section>
+  <form method="POST" class="settings-card">
+    <section class="settings-section"><h2>Profile & goal</h2><p>These details shape your learning experience.</p><div class="form-grid"><div class="field"><label>Name</label><input name="name" value="{{ user.name }}" required></div><div class="field"><label>Exam / goal</label><select class="select" name="exam"><option {% if user.exam=='NDA' %}selected{% endif %}>NDA</option><option {% if user.exam=='CAT' %}selected{% endif %}>CAT</option><option {% if user.exam=='SAT' %}selected{% endif %}>SAT</option><option {% if user.exam=='DET' %}selected{% endif %}>DET</option><option {% if user.exam=='English Proficiency' %}selected{% endif %}>English Proficiency</option><option {% if user.exam=='Other' %}selected{% endif %}>Other</option></select></div></div></section>
+    <section class="settings-section"><h2>Daily practice</h2><p>Choose a sustainable number of new/review words.</p><div class="field" style="max-width:330px"><label>Words per day · 3–50</label><input type="number" name="word_limit" min="3" max="50" value="{{ user.word_limit }}" required></div></section>
+    <section class="settings-section"><h2>Study window</h2><p>Optional dates for your current learning plan.</p><div class="form-grid"><div class="field"><label>Start date</label><input type="date" name="start_date" value="{{ user.start_date or '' }}"></div><div class="field"><label>Target end date</label><input type="date" name="end_date" value="{{ user.end_date or '' }}"></div></div></section>
+    <section class="settings-section"><h2>Change password</h2><p>Leave these blank if you don't want to change it.</p><div class="form-grid"><div class="field"><label>Current password</label><input type="password" name="current_password"></div><div class="field"><label>New password</label><input type="password" name="new_password" minlength="6"></div></div><div class="field" style="max-width:380px;margin-top:14px"><label>Confirm new password</label><input type="password" name="confirm_password" minlength="6"></div></section>
+    <button class="button" type="submit">Save changes</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,81 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login | Vocab Builder</title>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
-</head>
-<body class="auth-body">
-
-<div class="auth-box">
-    <h2>Login</h2>
-    <style>
-        .auth-body {
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .auth-box {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-        .auth-box h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .auth-box input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .auth-box button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .auth-box button:hover {
-            background-color: #0056b3;
-        }
-        @media (max-width: 400px) {
-           .auth-body {
-                padding: 10px;
-            }
-           
-            .auth-box {
-                width: 90%;
-            }
-            .auth-box h2 {
-                margin-bottom: 20px;
-                text-align: center;
-            }
-            .auth-box input {
-                width: 100%;
-            }
-            .auth-box button {
-                width: 100%;
-            }
-        }
-    </style>
-    <form method="POST">
-        <label for="email">Email address</label>
-       <input type="email" name="username" placeholder="Email" required>
-        <br>
-        <label for="password">Password</label>
-        <input type="password" name="password" placeholder="Password" required>
-        <br>    
-        <button type="submit">Login</button>
+{% extends "base.html" %}
+{% block title %}Log in · Vocab Builder{% endblock %}
+{% block content %}
+<div class="auth-page" style="margin:-72px -36px -28px;min-height:calc(100vh + 100px)">
+  <div class="auth-shell">
+    <div class="auth-logo"><span class="brand-mark">V</span> Vocab Builder</div>
+    <p class="eyebrow">YOUR DAILY LEARNING SPACE</p>
+    <h1>Welcome back.</h1>
+    <p class="lead">Pick up where your memory left off.</p>
+    <form method="POST" class="auth-form">
+      <div><label for="username">Email address</label><input id="username" type="email" name="username" placeholder="you@example.com" autocomplete="email" required></div>
+      <div><label for="password">Password</label><input id="password" type="password" name="password" placeholder="Your password" autocomplete="current-password" required></div>
+      <button class="button" type="submit">Continue <span>→</span></button>
     </form>
-   <p>New user? <a href="/signup">Sign up</a></p>
+    <div class="auth-foot">New here? <a href="{{ url_for('signup') }}">Create your account</a></div>
+  </div>
 </div>
-</body>
-</html>
+{% endblock %}

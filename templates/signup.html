@@ -1,106 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Signup | Vocab Builder</title>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
-</head>
-<body class="auth-body">
-
-<div class="auth-box">
-    <style>
-        .auth-body {
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .auth-box {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-        .auth-box h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .auth-box input, .auth-box select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .auth-box button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .auth-box button:hover {
-            background-color: #0056b3;
-        }
-        @media (max-width: 400px) {
-           .auth-body {
-                padding: 10px;
-            }
-           
-            .auth-box {
-                width: 90%;
-            }
-            .auth-box h2 {
-                margin-bottom: 20px;
-                text-align: center;
-            }
-            .auth-box input, .auth-box select {
-                width: 100%;
-                padding: 10px;
-                margin: 10px 0;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-            .auth-box button {
-                width: 100%;
-                padding: 10px;
-                background-color: #007bff;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-            .auth-box button:hover {
-                background-color: #0056b3;
-            }
-        }
-    </style>
-    <h2>Create Account</h2>
-    <form method="POST">
-        <input type="text" name="name" placeholder="Full Name" required>
-
-        <select name="exam">
-            <option>NDA</option>
-            <option>CAT</option>
-            <option>SAT</option>
-            <option>DET</option>
-            <option>English Proficiency</option>
-            <option>Other</option>
-        </select>
-
-        <input type="number" name="word_limit" placeholder="Daily word limit" required>
-        <input type="date" name="start_date">
-        <input type="date" name="end_date">
-
-        <input type="email" name="username" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-
-        <button type="submit">Sign Up</button>
+{% extends "base.html" %}
+{% block title %}Create account · Vocab Builder{% endblock %}
+{% block content %}
+<div class="auth-page" style="margin:-72px -36px -28px;min-height:calc(100vh + 100px)">
+  <div class="auth-shell">
+    <div class="auth-logo"><span class="brand-mark">V</span> Vocab Builder</div>
+    <p class="eyebrow">START WITH A PLAN</p>
+    <h1>Make vocabulary part of your routine.</h1>
+    <p class="lead">Set a small daily target. Vocab Builder will handle the review rhythm.</p>
+    <form method="POST" class="auth-form">
+      <div><label for="name">Full name</label><input id="name" type="text" name="name" placeholder="Your name" autocomplete="name" required></div>
+      <div><label for="exam">Main goal</label><select id="exam" name="exam"><option>NDA</option><option>CAT</option><option>SAT</option><option>DET</option><option selected>English Proficiency</option><option>Other</option></select></div>
+      <div><label for="word_limit">Words per day</label><input id="word_limit" type="number" name="word_limit" min="3" max="50" value="10" required></div>
+      <div class="form-grid"><div><label for="start_date">Start date</label><input id="start_date" type="date" name="start_date"></div><div><label for="end_date">Target end</label><input id="end_date" type="date" name="end_date"></div></div>
+      <div><label for="username">Email address</label><input id="username" type="email" name="username" placeholder="you@example.com" autocomplete="email" required></div>
+      <div><label for="password">Password</label><input id="password" type="password" name="password" placeholder="At least 6 characters" autocomplete="new-password" minlength="6" required></div>
+      <button class="button" type="submit">Create account <span>→</span></button>
     </form>
-<a href="/">Already have an account? Login</a>
-</div> 
-</body>
-</html>
+    <div class="auth-foot">Already learning here? <a href="{{ url_for('login') }}">Log in</a></div>
+  </div>
+</div>
+{% endblock %}
